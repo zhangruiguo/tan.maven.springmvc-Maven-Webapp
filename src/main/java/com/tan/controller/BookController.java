@@ -11,11 +11,12 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONException;
+import com.manager.Serialize;
 import com.tan.db.DBHelper;
 import com.tan.model.Book;
 import com.tan.service.BookService;
-import org.json.JSONException;
-import com.manager.Serialize;
 
 @Controller
 @RequestMapping("/book.do")
@@ -77,4 +78,13 @@ public class BookController {
 		ls = com.manager.Common.getMeunList();
 		return ls;
 	}
+	
+	@RequestMapping(params = "method=getmenustr")
+	@ResponseBody
+	public String getmenustr() throws JSONException { 
+		String str=null;
+		str = com.manager.Common.GetMeunStr();
+		return str;
+	}
+	
 }

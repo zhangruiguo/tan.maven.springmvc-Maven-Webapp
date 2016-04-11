@@ -10,13 +10,22 @@ public class Common {
 		List<HashMap<String, Object>> list_val = new ArrayList<HashMap<String, Object>>(); 
 		
 		HashMap<String, Object> map_1 = new HashMap<String, Object>();
-		map_1.put("Value", "我的报表|管理|管理我收藏的报表");
-		map_1.put("Key", "/home/FavorReportManager");
+		map_1.put("Value", "首页");
+		map_1.put("Key", "index.jsp");
 		HashMap<String, Object> map_2 = new HashMap<String, Object>();
-		map_2.put("Value", "自定义报表|市场统计|用户发贴数据核对");
-		map_2.put("Key", "/CustomBaseReportManagement/CustomBaseReportManager?reportId=20081");
+		map_2.put("Value", "测试");
+		map_2.put("Key", "test.jsp");
 		list_val.add(map_1); 
 		list_val.add(map_2); 
 		return list_val;
 	}
+	
+	public static String GetMeunStr()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(" <li> Iron Maiden - Brave New World 2000 <ul> <li>The Wicker Man<ul><li>dasdasd</li></ul></li> <li>Ghost Of The Navigator</li></ul><li>dasdas<li>");
+		
+		return sb.toString();
+	}
+	
 }

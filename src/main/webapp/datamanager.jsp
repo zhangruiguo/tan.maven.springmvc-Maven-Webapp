@@ -13,7 +13,8 @@
 </head>
 <body>
 	<div>
-		<input id="search_report" style="width:280px;" />
+		<input id="search_report" style="width:280px;" /></br>
+		<ul class="menu" style="max-width: 400px;margin: 0 auto;" >  </ul>
 		<textarea id="sqltext" rows="10" cols="80" class="k-content">show tables;</textarea>
 		<input id="limit" type="checkbox" checked="checked">最多100行数据</input>
 
@@ -42,6 +43,7 @@
       });
     }
     $(function () {
+    	 
         $.post("<%=request.getContextPath()%>/book.do?method=getdata",
            {
         	sql: $('#sqltext').val(),
@@ -49,6 +51,16 @@
            function (data, status) {
                initGrid(data.columns, data.rows);
        });
+        
+        $.post("<%=request.getContextPath()%>/book.do?method=getmenustr",
+                {
+                },
+                function (data, status) {
+                	$(".menu").html(data);
+                	$(".menu").kendoPanelBar({
+                        expandMode: "single"
+                    });
+            });
         
         $('#sqlsubmit').click(function (e) {
             e.preventDefault();
