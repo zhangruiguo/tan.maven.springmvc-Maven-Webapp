@@ -18,6 +18,7 @@ import com.tan.db.DBHelper;
 import com.tan.model.Book;
 import com.tan.service.BookService;
 
+
 @Controller
 @RequestMapping("/book.do")
 public class BookController {
@@ -51,9 +52,8 @@ public class BookController {
 	static DBHelper db1 = null;
 	static ResultSet rs = null;
 	static java.sql.ResultSetMetaData data = null;
-
-	@RequestMapping(params = "method=getdata")
 	@ResponseBody
+	@RequestMapping(params = "method=getdata")
 	public Map getdata(String sql) throws JSONException {
 		HashMap<String, Object> mp = new HashMap<String, Object>();
 		db1 = new DBHelper(sql);// 创建DBHelper对象
@@ -69,18 +69,16 @@ public class BookController {
 		}
 		return mp;
 	}
-
-	@RequestMapping(params = "method=getmenu")
 	@ResponseBody
+	@RequestMapping(params = "method=getmenu")
 	public List getmenu() throws JSONException {
 		List<HashMap<String, Object>> ls = new ArrayList<HashMap<String, Object>>();
 
 		ls = com.manager.Common.getMeunList();
 		return ls;
 	}
-	
-	@RequestMapping(params = "method=getmenustr")
 	@ResponseBody
+	@RequestMapping(params = "method=getmenustr")
 	public String getmenustr() throws JSONException { 
 		String str=null;
 		str = com.manager.Common.GetMeunStr();
