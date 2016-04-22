@@ -29,16 +29,23 @@
 		<property name="prefix" value="/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	 <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
-    <bean id="mappingJacksonHttpMessageConverter"
-        class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-        <property name="supportedMediaTypes">
+	<bean
+        class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="1" />
+        <property name="favorParameter" value="false" />
+        <property name="ignoreAcceptHeader" value="true" />
+        <property name="defaultContentType" value="text/html" />
+        <property name="mediaTypes">
+            <map>
+                <entry key="json" value="application/json" />
+            </map>
+        </property>
+        <property name="defaultViews">
             <list>
-                <value>apolication/json; charset=UTF-8</value>
-                <value>text/html;charset=UTF-8</value>
-                <value>text/plain;charset=UTF-8</value>
+                <bean id="jsonView"
+                    class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
             </list>
         </property>
-    </bean>
+     </bean>
 
 </beans>

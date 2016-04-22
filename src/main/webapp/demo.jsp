@@ -32,7 +32,7 @@ li {list-style:none;}
 </div>
 
 <div id="menu">
-<h2>Menu</h2>
+<h2 id='ht2'>Menu</h2>
 <ul class="menu" style="max-width: 400px;margin: 0 auto;" >  </ul>
 </div>
 
@@ -65,7 +65,9 @@ li {list-style:none;}
       });
     }
     $(function () {
-        $.post("<%=request.getContextPath()%>/book.do?method=getdata",
+    	
+
+        $.post('<%=request.getContextPath()%>/book.do?method=getdata',
            {
         	sql: $('#sqltext').val(),
            },
@@ -73,22 +75,23 @@ li {list-style:none;}
                initGrid(data.columns, data.rows);
        });
         
-        $.post("<%=request.getContextPath()%>/book.do?method=getmenustr",
-                {
-                },
-                function (data, status) {
+        $.post('<%=request.getContextPath()%>/book.do?method=getmenustr',{},
+                function (data) {
                 	$(".menu").html(data);
                 	$(".menu").kendoPanelBar({
                         expandMode: "single"
-                    });
-            });
+                    });}, "json");
+        $.post('<%=request.getContextPath()%>/book.do?method=select',{},
+                function (data) {
+                	$(".ht2").html(data);
+            }, "json");
         
         $('#sqlsubmit').click(function (e) {
             e.preventDefault();
             var grid = $('#ResultGrid');
             grid.removeData('kendoGrid');
             grid.empty();
-            $.post("<%=request.getContextPath()%>/book.do?method=getdata",
+            $.post('<%=request.getContextPath()%>/book.do?method=getdata',
 												{
 													sql : $('#sqltext').val(),
 												}, function(data, status) {
@@ -108,7 +111,7 @@ li {list-style:none;}
                 transport: {
                     read: {
                         url: function (options) {
-                            return "<%=request.getContextPath()%>/book.do?method=getmenu";
+                            return '<%=request.getContextPath()%>/book.do?method=getmenu';
                         },
                         dataType: "json" // use "json" for same-domain requests;"jsonp" is required for cross-domain requests; 
                     }
